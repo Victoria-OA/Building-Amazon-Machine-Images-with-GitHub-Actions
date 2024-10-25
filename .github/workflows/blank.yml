@@ -1,0 +1,57 @@
+name: Packer AMI Build and Deploy
+
+on:
+  workflow_dispatch: # Manual trigger
+
+env:
+  AWS_REGION: us-east-2
+  PACKER_FILE: ami.json
+
+jobs:
+  build-ami:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install HashiCorp Packer
+        uses: hashicorp/setup-packer@v2
+        with:
+          version: '1.8.0' # Specify packer version or use 'latest'
+
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install packer plugin
+        run: packer plugins install github.com/hashicorp/amazon
+
+      - name: Validate Packer template
+        run: |
+          packer validate ${{ env.PACKER_FILE }}
+      - name: Build AMI
+        run: |
+          packer build ${{ env.PACKER_FILE }}
+  deploy-ami:
+    needs: build-ami
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Launch EC2 instance with new AMI
+        run: |
+          AMI_ID=$(packer build -machine-readable ${{ env.PACKER_FILE }} | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ':' -f2)
+          echo "New AMI ID: $AMI_ID"
