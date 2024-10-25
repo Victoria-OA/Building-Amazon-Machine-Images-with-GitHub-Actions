@@ -4,8 +4,8 @@ on:
   workflow_dispatch: # Manual trigger
 
 env:
-  AWS_REGION: us-east-2
-  PACKER_FILE: ami.json
+  AWS_REGION: eu-west-2
+  PACKER_FILE: ./ami.json
 
 jobs:
   build-ami:
