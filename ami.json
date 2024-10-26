@@ -74,7 +74,9 @@
         "sudo systemctl enable docker.service",
         "sudo systemctl start docker.service",
         "sudo apt-get install -y git",    
-        "echo $DOCKER_PASSWORD | sudo docker login -u $DOCKER_USERNAME --password-stdin",        
+        "echo \"Docker Username: {{user `docker_username`}}\"",
+        "echo \"Docker Password: {{user `docker_password`}}\"",
+        "sudo docker login -u {{user `docker_username`}} -p {{user `docker_password`}}",
         "sudo chmod 666 /var/run/docker.sock",
         "sudo docker pull oluwasanmivic123/cicd:latest"
       ]
