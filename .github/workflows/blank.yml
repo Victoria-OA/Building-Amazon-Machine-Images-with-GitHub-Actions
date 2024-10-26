@@ -7,6 +7,9 @@ env:
   AWS_REGION: eu-west-2
   PACKER_FILE: ./ami.json
 
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   build-ami:
     runs-on: ubuntu-latest
