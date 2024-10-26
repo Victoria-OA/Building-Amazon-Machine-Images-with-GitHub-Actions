@@ -9,7 +9,7 @@
     "docker_username": "{{env `DOCKER_USERNAME`}}",
     "docker_password": "{{env `DOCKER_PASSWORD`}}",
     "ssh_keypair_name": "vic",
-    "ssh_private_key_file": "/home/victoria/Desktop/vic.pem",
+    "ssh_private_key_file": "./vic.pem",
     "security_group_id": "sg-001b86c8f87f54fab",
     "iam_instance_profile": "awsami",
     "aws_account_id_to_share_with": "{{env `ACCOUNT_ID`}}"
