@@ -40,7 +40,7 @@ jobs:
           packer validate ${{ env.PACKER_FILE }}
       - name: Build AMI
         run: |
-          packer build ${{ env.PACKER_FILE }}
+          packer build ${{ env.PACKER_FILE }} -var "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" -var "DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}"
   deploy-ami:
     needs: build-ami
     runs-on: ubuntu-latest
