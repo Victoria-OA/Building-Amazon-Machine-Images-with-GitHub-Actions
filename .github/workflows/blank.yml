@@ -29,8 +29,8 @@ jobs:
 
       - name: Create SSH Private Key File
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key.pem
-          chmod 600 ssh_key.pem
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > vic.pem
+          chmod 600 vic.pem
 
       - name: Install packer plugin
         run: packer plugins install github.com/hashicorp/amazon
