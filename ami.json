@@ -63,7 +63,6 @@
       "DEBCONF_NOWARNINGS=yes"
     ],
       "inline": [
-        "DEBIAN_FRONTEND=noninteractive",
         "sudo apt-get update",
         "sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common",
         "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
@@ -75,7 +74,7 @@
         "sudo systemctl enable docker.service",
         "sudo systemctl start docker.service",
         "sudo apt-get install -y git",    
-        "sudo docker login -u {{user `docker_username`}} -p {{user `docker_password`}}",
+        "echo $DOCKER_PASSWORD | sudo docker login -u $DOCKER_USERNAME --password-stdin",        
         "sudo chmod 666 /var/run/docker.sock",
         "sudo docker pull oluwasanmivic123/cicd:latest"
       ]
