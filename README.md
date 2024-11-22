@@ -55,7 +55,7 @@ export DOCKER_PASSWORD=<docker_password>
 packer validate ami.json 
 ``` 
 - [ ] If the configuration file is valid then you should see the below output
-![packer](images/2.png)
+![packer](./images/2.png)
 
 ## Execute the configuration file
 - [ ] With the configuration validated, you can now build the AMI using the following command
@@ -63,14 +63,14 @@ packer validate ami.json
 packer build ami.json
 ```
 - [ ] During the build process, Packer will output detailed logs, showing you the steps it’s taking. The output should look something like this
-![packer](images/1.png)
+![packer](./images/1.png)
 
 - [ ] Once the build is complete, Packer will confirm with a success message
-![packer](images/3.png)
+![packer](./images/3.png)
 
 ## Verify the AMI
 After the build process, navigate to the AMI section under EC2 in AWS console. You should see your newly created AMI listed there.
-![packer](images/4.png)
+![packer](./images/4.png)
 
 ## Launch the instance from this AMI
 
@@ -80,10 +80,10 @@ You can launch the instance from this AMI to confirm our AMI is working
 
 
 - [ ] the AMI used here is the AMI we configured so there are no options for other AMI
-![packer](images/5.png)
+![packer](./images/5.png)
 
 - [ ] The instance created from the AMI is up and running successfully:
-![packer](images/6.png)
+![packer](./images/6.png)
 
 ## Access Your Application in the Browser
 
@@ -95,4 +95,4 @@ http://public_ip:port
 
 - [ ] You should see your application’s interface, indicating that everything is functioning correctly
 
-![packer](images/9.png)
+![packer](./images/9.png)
